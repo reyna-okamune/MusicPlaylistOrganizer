@@ -30,8 +30,6 @@ export default function Home() {
   };
 
   // Selection sort handler
-  const [ascending, setAscending] = useState(true);
-  const [descending, setDescending] = useState(false);
 
   const selectionSort = () => {
     // copy songs array
@@ -66,64 +64,66 @@ export default function Home() {
   }
 
   return (
-    <div className="home-container">
-      <h1>Music Playlist Sorting</h1>
+    <main className="page-container animate__animated animate__zoomIn">
+      <div className="home-container">
+        <h1>Music Playlist Sorting</h1>
 
-      <div className="playlist-container">
-        <div className="playlist-header">
-          <h2>Playlist</h2>
-          <button className="refresh-button" onClick={refreshPlaylist}>
-            <FaRedo />
-          </button>
-        </div>
+        <div className="playlist-container">
+          <div className="playlist-header">
+            <h2>Playlist</h2>
+            <button className="refresh-button" onClick={refreshPlaylist}>
+              <FaRedo />
+            </button>
+          </div>
 
-        <div className="playlist-items-container">
-          {/* Replace static items with mapped songs array */}
-          {songs.map((song) => (
-            <div key={song.id} className="playlist-item">
-              <div>
-                <h3>{song.title}</h3>
-                <p>{song.artist}</p>
+          <div className="playlist-items-container">
+            {/* Replace static items with mapped songs array */}
+            {songs.map((song) => (
+              <div key={song.id} className="playlist-item">
+                <div>
+                  <h3>{song.title}</h3>
+                  <p>{song.artist}</p>
+                </div>
+                <button 
+                  className="delete-button"
+                  onClick={() => handleDeleteSong(song.id)}
+                >
+                  <FaTrash />
+                </button>
               </div>
-              <button 
-                className="delete-button"
-                onClick={() => handleDeleteSong(song.id)}
-              >
-                <FaTrash />
-              </button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="add-song-form">
-          <input 
-            type="text"
-            placeholder="Enter song name"
-            className="song-input"
-            value={newSongTitle}
-            onChange={(e) => setNewSongTitle(e.target.value)}
-          />
-          <input 
-            type="text"
-            placeholder="Enter artist name"
-            className="artist-input"
-            value={newArtistName}
-            onChange={(e) => setNewArtistName(e.target.value)}
-          />
-          <button 
-            className="add-song-button"
-            onClick={handleAddSong}
-          >
-            +
-          </button>
-        </div>
+          <div className="add-song-form">
+            <input 
+              type="text"
+              placeholder="Enter song name"
+              className="song-input"
+              value={newSongTitle}
+              onChange={(e) => setNewSongTitle(e.target.value)}
+            />
+            <input 
+              type="text"
+              placeholder="Enter artist name"
+              className="artist-input"
+              value={newArtistName}
+              onChange={(e) => setNewArtistName(e.target.value)}
+            />
+            <button 
+              className="add-song-button"
+              onClick={handleAddSong}
+            >
+              +
+            </button>
+          </div>
 
-        <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>Total Songs on Playlist: {songs.length}</h3>
+          <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>Total Songs on Playlist: {songs.length}</h3>
 
-        <div className="sort-button-container">
-          <div className="sort-button" onClick={selectionSort}>Selection Sort</div>
+          <div className="sort-button-container">
+            <div className="sort-button" onClick={selectionSort}>Selection Sort</div>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

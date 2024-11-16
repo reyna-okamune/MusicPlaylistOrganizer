@@ -23,6 +23,23 @@ body {
   justify-content: center;
   align-items: center;
 }
+.page-container {
+  width: 100%;
+  animation: zoomIn;
+  animation-duration: 1s;
+  border: 5px solid blue;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
 
 .home-container {
   padding: 2rem;
@@ -41,6 +58,18 @@ body {
   border-radius: 1rem;
   padding: 1rem;
   flex-direction: row;
+  min-height: 300px;
+}
+
+.playlist-items-container:empty::before {
+  content: "add songs to start sorting!";
+  color: var(--background);
+  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .playlist-item {
