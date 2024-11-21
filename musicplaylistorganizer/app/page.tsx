@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { FaTrash, FaRedo } from 'react-icons/fa';
 
 export default function Home() {
-  const [originalSongs, setOriginalSongs] = useState<Array<{id: string, title: string, artist: string, highlighting?: boolean}>>([]);
-  const [songs, setSongs] = useState<Array<{id: string, title: string, artist: string, highlighting?: boolean, swapping?: boolean}>>([]);
+  const [originalSongs, setOriginalSongs] = useState<Array<{id: string, title: string, artist: string}>>([]);
+  const [songs, setSongs] = useState<Array<{id: string, title: string, artist: string}>>([]);
   const [newSongTitle, setNewSongTitle] = useState('');
   const [newArtistName, setNewArtistName] = useState('');
 
@@ -29,11 +29,10 @@ export default function Home() {
     setSongs(songs.filter(song => song.id !== idToDelete));
   };
 
-  // Add this delay helper function
-  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  // Selection sort handler
 
-  // Update the selection sort function to be async
-  const selectionSort = async () => {
+  const selectionSort = () => {
+    // copy songs array
     const songsCopy = [...songs];
 
     // get size of songs array (songsCopy)
@@ -46,35 +45,18 @@ export default function Home() {
       for (let j = i + 1; j < n; j++) {
         if (songsCopy[j].title.toLowerCase() < songsCopy[minIndex].title.toLowerCase()) {
           minIndex = j;
-        }
-      }
-
-      if (minIndex !== i) {
-        // Highlight elements to be swapped
-        const tempArray = [...songsCopy];
-        tempArray[i] = { ...tempArray[i], highlighting: true };
-        tempArray[minIndex] = { ...tempArray[minIndex], highlighting: true };
-        setSongs(tempArray);
-
-        // Wait to show highlighting
-        await delay(800);
-
-        // Remove highlighting and add swapping class
-        tempArray[i] = { ...tempArray[i], highlighting: false, swapping: true };
-        tempArray[minIndex] = { ...tempArray[minIndex], highlighting: false, swapping: true };
-        setSongs(tempArray);
-
-        // Wait for swap animation
-        await delay(800);
-
-        // Perform the actual swap
-        [songsCopy[i], songsCopy[minIndex]] = [songsCopy[minIndex], songsCopy[i]];
-        
-        // Update with swapped items, remove swapping class
-        setSongs(songsCopy.map(song => ({ ...song, swapping: false })));
-      }
+      } 
     }
-  };
+
+    // swap songsCopy[i] and songsCopy[minIndex]
+    if (minIndex !== i) {
+      [songsCopy[i], songsCopy[minIndex]] = [songsCopy[minIndex], songsCopy[i]];
+    }
+  }
+
+  // set sorted songs
+  setSongs(songsCopy);
+}
 
   // refresh playlist handler
   const refreshPlaylist = () => {
@@ -96,11 +78,8 @@ export default function Home() {
 
           <div className="playlist-items-container">
             {/* Replace static items with mapped songs array */}
-            {songs.map((song: any) => (
-              <div 
-                key={song.id} 
-                className={`playlist-item ${song.highlighting ? 'highlighting' : ''} ${song.swapping ? 'swapping' : ''}`}
-              >
+            {songs.map((song) => (
+              <div key={song.id} className="playlist-item">
                 <div>
                   <h3>{song.title}</h3>
                   <p>{song.artist}</p>
