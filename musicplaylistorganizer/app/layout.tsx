@@ -1,4 +1,3 @@
-'use client';
 import './globals.css'
 import { Poppins } from 'next/font/google'
 
@@ -15,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.className}>
       <body className={poppins.className}>
-        <div className="container">{children}</div>
+        <div className="page-container">{children}</div>
       </body>
     </html>
   )
