@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { FaTrash, FaRedo } from 'react-icons/fa';
 
@@ -71,7 +72,7 @@ const insertionSort = () => {
   const n = songsCopy.length;
 
   for (let i = 2; i <= n; i++) {
-    let sortMe = songsCopy[i - 1];
+    const sortMe = songsCopy[i - 1];
     let j = i - 2;
 
     while (j >= 0 && sortMe.title.toLowerCase() < songsCopy[j].title.toLowerCase()) {
