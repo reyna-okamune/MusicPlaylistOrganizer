@@ -11,9 +11,14 @@ export default function Home() {
   // Add song handler
   const handleAddSong = () => {
     if (newSongTitle && newArtistName) {
+      const capitalizedTitle = newSongTitle
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+
       const newSong = { 
-        id: crypto.randomUUID(),
-        title: newSongTitle, 
+        id: Math.random().toString(36).substring(2, 15),
+        title: capitalizedTitle, 
         artist: newArtistName 
       };
       setOriginalSongs([...originalSongs, newSong]);
@@ -30,7 +35,6 @@ export default function Home() {
   };
 
   // Selection sort handler
-
   const selectionSort = () => {
     // copy songs array
     const songsCopy = [...songs];
@@ -55,6 +59,36 @@ export default function Home() {
   }
 
   // set sorted songs
+  setSongs(songsCopy);
+}
+
+// Insertion Sort Handler
+const insertionSort = () => {
+  // copy songs array
+  const songsCopy = [...songs];
+
+  // get size of songs array (songsCopy)
+  const n = songsCopy.length;
+
+  for (let i = 2; i <= n; i++) {
+    let sortMe = songsCopy[i - 1];
+    let j = i - 2;
+
+    while (j >= 0 && sortMe.title.toLowerCase() < songsCopy[j].title.toLowerCase()) {
+      songsCopy[j + 1] = songsCopy[j];
+      j--;
+    }
+    songsCopy[j + 1] = sortMe;
+  }
+
+  // set sorted songs
+  songsCopy.forEach(song => {
+    song.title = song.title
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  });
+
   setSongs(songsCopy);
 }
 
@@ -121,6 +155,7 @@ export default function Home() {
 
           <div className="sort-button-container">
             <div className="sort-button" onClick={selectionSort}>Selection Sort</div>
+            <div className="sort-button" onClick={insertionSort}>Insertion Sort</div>
           </div>
         </div>
       </div>
