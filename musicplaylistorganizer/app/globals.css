@@ -26,7 +26,6 @@ body {
   width: 100%;
   animation: zoomIn;
   animation-duration: 1s;
-  border: 5px solid blue;
 }
 
 @keyframes zoomIn {
@@ -42,7 +41,6 @@ body {
 
 .home-container {
   padding: 2rem;
-  border: 1px solid red;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -53,7 +51,6 @@ body {
 
 .playlist-container {
   padding: 4rem;
-  border: 1px solid blue;
 }
 
 .playlist-items-container {
@@ -67,7 +64,7 @@ body {
 .playlist-items-container:empty::before {
   content: "add songs to start sorting!";
   color: var(--background);
-  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
   font-style: italic;
   display: flex;
   justify-content: center;
@@ -112,7 +109,6 @@ h3 {
   min-width: 0;
   margin-top: 1rem;
   padding: 1rem;
-  border: 1px solid green;
 }
 
 .song-input,
@@ -120,7 +116,7 @@ h3 {
   padding: 0.5rem;
   border: 2px solid #ff779f;
   border-radius: 5px;
-  font-size: clamp(0.5rem, 1.5vw, 1.5rem);
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
   flex: 1;
   min-width: 0;
 }
@@ -162,7 +158,6 @@ h3 {
   justify-content: center;
   margin-top: 1rem;
   padding: 4rem;
-  border: 1px solid rgb(255, 0, 144);
 }
 
 .sort-button {

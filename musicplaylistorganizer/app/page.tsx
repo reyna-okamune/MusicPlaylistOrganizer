@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { FaTrash, FaRedo } from 'react-icons/fa';
+import Image from 'next/image'
 
 export default function Home() {
   const [originalSongs, setOriginalSongs] = useState<Array<{id: string, title: string, artist: string}>>([]);
@@ -101,7 +102,14 @@ const insertionSort = () => {
   return (
     <main className="page-container animate__animated animate__zoomIn">
       <div className="home-container">
-        <h1>Music Playlist Sorting</h1>
+        <Image 
+          src="/project_title.png"
+          alt="Music Playlist Sorting"
+          width={1000}
+          height={250}
+          className="w-[90%] max-w-[800px] h-auto mx-auto"
+          priority
+        />
 
         <div className="playlist-container">
           <div className="playlist-header">
@@ -157,6 +165,7 @@ const insertionSort = () => {
           <div className="sort-button-container">
             <div className="sort-button" onClick={selectionSort}>Selection Sort</div>
             <div className="sort-button" onClick={insertionSort}>Insertion Sort</div>
+            <div className="sort-button">Bubble Sort</div>
           </div>
         </div>
       </div>
